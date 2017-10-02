@@ -33,4 +33,17 @@ function Action() {
 
     document.addEventListener("keydown", function(e) {handleKeyEvent(e, true)});
     document.addEventListener("keyup", function(e) {handleKeyEvent(e, false)});
+    
+    var mouse = {x:0,y:0};
+    var cameraMoves = {x:0,y:0,z:-0.1,move:false,speed:0.1};
+    function mouseMove(e){
+        
+        camera.position.x += Math.max(Math.min((e.clientX - mouse.x) * 0.01, cameraMoves.speed), -cameraMoves.speed);
+        camera.position.y += Math.max(Math.min((mouse.y - e.clientY) * 0.01, cameraMoves.speed), -cameraMoves.speed);
+        
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        
+        }
+        window.addEventListener('mousemove', mouseMove);
 }
